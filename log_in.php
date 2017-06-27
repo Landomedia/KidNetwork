@@ -64,47 +64,6 @@
 			</nav>
 	  </div>
 	</header>
-		<?
-			//initialize vars
-			$emailErr = $passwordErr = "";
-			$email = $password = "";
-
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$valid = true;
-				}
-
-				if (empty($_POST["email"])) {
-					$emailErr = "Email is required";
-					$valid = false;
-				} else {
-					$email = test_input($_POST["email"]);
-					// check if e-mail address is well-formed
-					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-						$emailErr = "Invalid email format";
-						$valid = false;
-					}
-				}
-                if (empty($_POST["password"])) {
-                  $passwordErr = "Your password is required.";
-                  $valid = false;
-                } else {
-                  $password = test_input($_POST["password"]);
-                }
-
-				if ($valid) {
-					//proceed
-					$state = "store data";
-				}
-
-			function test_input($data) {
-				$data = trim($data);
-				$data = stripslashes($data);
-				$data = htmlspecialchars($data);
-				return $data;
-			}
-
-			if ($state == "sign in") {
-		?>
 <section id="fh5co-explore" style="text-align: center;">
   <div class="col-md-12">
 
@@ -112,11 +71,9 @@
 
   				<div class="form-group">
                       <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
-  					<span class="error">* <?php echo $emailErr;?></span>
           </div>
           <div class="form-group">
                       <input type="password" name="password" id="password" value="<?php echo $password;?>" placeholder="Password" />
-            <span class="error">* <?php echo $passwordErr;?></span>
             <div class="form-group">
   		              <div class="form-group">
                       <ul class="actions">
@@ -125,42 +82,8 @@
                   </div>
 
 				</form>
-            <li class = "call-to-action"><a onclick="window.location.href='log_in.php'"><span>Already have an account? Log in!</span></a></li>
+            <li class = "call-to-action"><a onclick="window.location.href='sign_in.php'"><span>Don't have an account? Sign up!</span></a></li>
             </div>
           </section>
-		<?php
-			} else if ($state == "store data") {
-				$email = $_POST["email"];
-                $password = $_POST["password"];
-				$db = new SQLite3('userinfo.db');
-				$db->exec(" CREATE TABLE IF NOT EXISTS users (email TEXT NOT NULL, password TEXT NOT NULL)");
-				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, count, school, state)"." VALUES
-				('$method', '$paypal', '$name', '$email', '$instagram', $count, '$school', '$state');");
-				$db->close();
-
-		?>
-		<h1>Thank you for signing up!</h1>
-		<?php
-			}
-		?>
-		<script>
-		$(document).ready(function(){
-			$("#method").change(function(){
-				var value = $(this).find("option:selected").attr("value");
-
-				switch (value) {
-					case "Amazon":
-						$("#paypal").hide();
-						break;
-					case "Paypal":
-						$("#paypal").show();
-						break;
-					default:
-						$("#paypal").hide();
-						break;
-				}
-			});
-		});
-		</script>
       </body>
     </html>

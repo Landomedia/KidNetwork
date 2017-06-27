@@ -318,10 +318,10 @@
 				$school = $_POST["school"];
 				$state = $_POST["location"];
                 $password = $_POST["password"];
-				$db = new SQLite3('userinfo.db');
-				$db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
-				name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL, count INTEGER NOT NULL,
-				 school TEXT NOT NULL, state TEXT NOT NULL, password TEXT NOT NULL)");
+				//s$db = new SQLite3('userinfo.db');
+				//$db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
+				//name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL, count INTEGER NOT NULL,
+				//school TEXT NOT NULL, state TEXT NOT NULL, password TEXT NOT NULL)");
 				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, count, school, state, password)"." VALUES
 				('$method', '$paypal', '$name', '$email', '$instagram', $count, '$school', '$state', '$password');");
 				$db->close();

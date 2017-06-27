@@ -39,6 +39,7 @@
 
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
 
         <!-- Header -->
@@ -167,13 +168,14 @@
 			<div class="form-group">
         <select name="method" id="method">
             <option value="">How would you like to get paid?</option>
-						<option value="Paypal">Paypal</option>
-						<option value="Amazon">Amazon Gift Card</option>
-					</select>
+			<option value="Paypal" id="paypal-option">Paypal</option>
+			<option value="Amazon" id="amazon-option">Amazon Gift Card</option>
+		</select>
+					
            <span class="error">* <?php echo $methodErr;?></span>
         </div>
   				<div class="form-group">
-                <input type="text" name="paypal" id="paypal" value="<?php echo $paypal;?>" placeholder="If Paypal, enter your Paypal email"/>
+                <input type="text" name="paypal" id="paypal" value="<?php echo $paypal;?>" placeholder="Enter your Paypal email" style="display:none;"/>
             </div>
   				<div class="form-group">
                 <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name"/>
@@ -195,56 +197,56 @@
             <select name="state" id="state">
                 <option value="">What state do you live in?</option>
                 <option value="AL">Alabama</option>
-  							<option value="AK">Alaska</option>
-  							<option value="AZ">Arizona</option>
-  							<option value="AR">Arkansas</option>
-  							<option value="CA">California</option>
-  							<option value="CO">Colorado</option>
-  							<option value="CT">Connecticut</option>
-  							<option value="DE">Delaware</option>
-  							<option value="DC">District Of Columbia</option>
-  							<option value="FL">Florida</option>
-  							<option value="GA">Georgia</option>
-  							<option value="HI">Hawaii</option>
-  							<option value="ID">Idaho</option>
-  							<option value="IL">Illinois</option>
-  							<option value="IN">Indiana</option>
-  							<option value="IA">Iowa</option>
-  							<option value="KS">Kansas</option>
-  							<option value="KY">Kentucky</option>
-  							<option value="LA">Louisiana</option>
-  							<option value="ME">Maine</option>
-  							<option value="MD">Maryland</option>
-  							<option value="MA">Massachusetts</option>
-  							<option value="MI">Michigan</option>
-  							<option value="MN">Minnesota</option>
-  							<option value="MS">Mississippi</option>
-  							<option value="MO">Missouri</option>
-  							<option value="MT">Montana</option>
-  							<option value="NE">Nebraska</option>
-  							<option value="NV">Nevada</option>
-  							<option value="NH">New Hampshire</option>
-  							<option value="NJ">New Jersey</option>
-  							<option value="NM">New Mexico</option>
-  							<option value="NY">New York</option>
-  							<option value="NC">North Carolina</option>
-  							<option value="ND">North Dakota</option>
-  							<option value="OH">Ohio</option>
-  							<option value="OK">Oklahoma</option>
-  							<option value="OR">Oregon</option>
-  							<option value="PA">Pennsylvania</option>
-  							<option value="RI">Rhode Island</option>
-  							<option value="SC">South Carolina</option>
-  							<option value="SD">South Dakota</option>
-  							<option value="TN">Tennessee</option>
-  							<option value="TX">Texas</option>
-  							<option value="UT">Utah</option>
-  							<option value="VT">Vermont</option>
-  							<option value="VA">Virginia</option>
-  							<option value="WA">Washington</option>
-  							<option value="WV">West Virginia</option>
-  							<option value="WI">Wisconsin</option>
-  							<option value="WY">Wyoming</option>
+				<option value="AK">Alaska</option>
+				<option value="AZ">Arizona</option>
+				<option value="AR">Arkansas</option>
+				<option value="CA">California</option>
+				<option value="CO">Colorado</option>
+				<option value="CT">Connecticut</option>
+				<option value="DE">Delaware</option>
+				<option value="DC">District Of Columbia</option>
+				<option value="FL">Florida</option>
+				<option value="GA">Georgia</option>
+				<option value="HI">Hawaii</option>
+				<option value="ID">Idaho</option>
+				<option value="IL">Illinois</option>
+				<option value="IN">Indiana</option>
+				<option value="IA">Iowa</option>
+				<option value="KS">Kansas</option>
+				<option value="KY">Kentucky</option>
+				<option value="LA">Louisiana</option>
+				<option value="ME">Maine</option>
+				<option value="MD">Maryland</option>
+				<option value="MA">Massachusetts</option>
+				<option value="MI">Michigan</option>
+				<option value="MN">Minnesota</option>
+				<option value="MS">Mississippi</option>
+				<option value="MO">Missouri</option>
+				<option value="MT">Montana</option>
+				<option value="NE">Nebraska</option>
+				<option value="NV">Nevada</option>
+				<option value="NH">New Hampshire</option>
+				<option value="NJ">New Jersey</option>
+				<option value="NM">New Mexico</option>
+				<option value="NY">New York</option>
+				<option value="NC">North Carolina</option>
+				<option value="ND">North Dakota</option>
+				<option value="OH">Ohio</option>
+				<option value="OK">Oklahoma</option>
+				<option value="OR">Oregon</option>
+				<option value="PA">Pennsylvania</option>
+				<option value="RI">Rhode Island</option>
+				<option value="SC">South Carolina</option>
+				<option value="SD">South Dakota</option>
+				<option value="TN">Tennessee</option>
+				<option value="TX">Texas</option>
+				<option value="UT">Utah</option>
+				<option value="VT">Vermont</option>
+				<option value="VA">Virginia</option>
+				<option value="WA">Washington</option>
+				<option value="WV">West Virginia</option>
+				<option value="WI">Wisconsin</option>
+				<option value="WY">Wyoming</option>
                           </select>
                   <span class="error">* <?php echo $stateErr;?></span>
                 </div>
@@ -262,8 +264,6 @@
 				</form>  
             </div>
           </section>
-        </body>
-      </html>
 		<?php
 			} else if ($state == "store data") {
 				$method = $_POST["method"];
@@ -287,5 +287,24 @@
 		<?php
 			}
 		?>
+		<script>
+		$(document).ready(function(){
+			$("#method").change(function(){
+				var value = $(this).find("option:selected").attr("value");
+				
+				switch (value) {
+					case "Amazon":
+						$("#paypal").hide();
+						break;
+					case "Paypal":
+						$("#paypal").show();
+						break;
+					default:
+						$("#paypal").hide();
+						break;
+				}
+			});
+		});
+		</script>
       </body>
     </html>

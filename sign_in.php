@@ -20,10 +20,6 @@
                 <a href="index.html" class="logo">Landomedia</a>
                 <nav id="nav">
                     <a href="index.html">Home</a>
-                    <a href="generic.html">Advertise Today</a>
-                    <a href="elements.html">Buy a plan</a>
-                    <a href="philosophy.html">Our Philosophy</a>
-                    <a href="investors.html">Investors and Advisors</a>
                 </nav>
                 <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
             </div>
@@ -101,6 +97,18 @@
 		<p><span class="error">* required field.</span></p>
         <form method="post" action="form_process.php">
             <div class="row uniform">
+				<div class="12u$(xsmall)">
+				<div class="select-wrapper">
+                        <select name="method" id="method">
+                            <option value="">How would you like to get paid?</option>
+							<option value="Paypal">Paypal</option>
+							<option value="Amazon">Amazon Gift Card</option>
+						</select>
+                </div>
+				</div>
+				<div class="12u$(xsmall)">
+                    <input type="text" name="paypal" id="paypal" value="If Paypal, enter your Paypal email" placeholder="email" />
+                </div>
                 <div class="12u$(xsmall)">
                     <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name" />
 					<span class="error">* <?php echo $nameErr;?></span>
@@ -188,7 +196,5 @@
                         <td><input type="submit" name ="b1" value="Submit" onClick="store.php"/></td>
                     </ul>
                 </div>
-        <script type="text/javascript">
-		</script>
       </body>
     </html>

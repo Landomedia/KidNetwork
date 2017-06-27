@@ -121,14 +121,13 @@
 				return $data;
 			}
 		?>
+<div class="col-md-4">
 
-        <h3 class="align-center">Form</h3>
+    <h3 class="section-title">Form</h3>
 
 		<p><span class="error">* required field.</span></p>
-        <form method="post" action="form_process.php">
-            <div class="row uniform">
-				<div class="12u$(xsmall)">
-				<div class="select-wrapper">
+        <form method="post" action="form_process.php" class="contact-form">
+				<div class="form-group">
                         <select name="method" id="method">
                             <option value="">How would you like to get paid?</option>
 							<option value="Paypal">Paypal</option>
@@ -136,27 +135,26 @@
 						</select>
                 </div>
 				</div>
-				<div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="text" name="paypal" id="paypal" value="If Paypal, enter your Paypal email" placeholder="email" />
                 </div>
-                <div class="12u$(xsmall)">
-                    <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name" />
+				<div class="form-group">
+                    <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name" class="form-control"/>
 					<span class="error">* <?php echo $nameErr;?></span>
                 </div>
-                <div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
 					<span class="error">* <?php echo $emailErr;?></span>
                 </div>
-                <div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />
 					<span class="error">* <?php echo $instagramErr;?></span>
                 </div>
-				<div class="12u$(xsmall)">
+				<div class="form-group">
 					<input type="text" name="school" id="school" value="<?php echo $school;?>" placeholder="School" />
 					<span class="error">* <?php echo $schoolErr;?></span>
 				</div>
-                <div class="12u$(xsmall)">
-                    <div class="select-wrapper">
+				<div class="form-group">
                         <select name="state" id="state">
                             <option value="">What state do you live in?</option>
                             <option value="AL">Alabama</option>
@@ -214,17 +212,18 @@
 						<span class="error">* <?php echo $stateErr;?></span>
                     </div>
                 </div>
-                <div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="text" name="count" id="count" value="" placeholder="CURRENT Follower Count" />
 					<span class="error">* <?php echo $countErr;?></span>
                 </div>
             </form>
 
 
-                <div class="12u$">
+				<div class="form-group">
                     <ul class="actions">
                         <td><input type="submit" name ="b1" value="Submit" onClick="store.php"/></td>
                     </ul>
                 </div>
+        </div>
       </body>
     </html>

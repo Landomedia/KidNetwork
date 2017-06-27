@@ -66,12 +66,19 @@
 	</header>
 		<?
 			//initialize vars
-			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = "";
-			$name = $email = $instagram = $count = $school = $state = $method = "";
+			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = $passwordErr = $confirmErr = $confirmpasswordErr = "";
+			$name = $email = $instagram = $count = $school = $state = $method = $password = $confirm = $confirmpassword = "";
 			$state = "sign in";
-			
+
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$valid = true;
+                if ($_POST["password"] == $_POST["confirm"]) {
+                    // success!
+                    }
+                    else {
+                        $confirmpasswordErr = "Passwords do not match";
+                        // failed :(
+                    }
 
 				if (empty($_POST["name"])) {
 					$nameErr = "Name is required";
@@ -135,13 +142,29 @@
 				} else {
 					$location = test_input($_POST["location"]);
 				}
-					
+
 				if (empty($_POST["method"])) {
 				  $methodErr = "Your payment method is required.";
 				  $valid = false;
 				} else {
 				  $method = test_input($_POST["method"]);
 				}
+                if (empty($_POST["password"])) {
+                  $passwordErr = "Your password is required.";
+                  $valid = false;
+                } else {
+                  $password = test_input($_POST["password"]);
+                }
+                if (empty($_POST["confirm"])) {
+                  $confirmErr = "Please confirm your password";
+                  $valid = false;
+                } else {
+                  $confirm = test_input($_POST["confirm"]);
+                }
+                if (empty($_POST["confirmpassword"])) {
+                  $confirmpasswordErr = "Your passwords do not match";
+                  $valid = false;
+                }
 
 				if ($valid) {
 					//proceed
@@ -171,7 +194,7 @@
 			<option value="Paypal" id="paypal-option">Paypal</option>
 			<option value="Amazon" id="amazon-option">Amazon Gift Card</option>
 		</select>
-					
+
            <span class="error">* <?php echo $methodErr;?></span>
         </div>
   				<div class="form-group">
@@ -185,6 +208,13 @@
                       <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
   					<span class="error">* <?php echo $emailErr;?></span>
           </div>
+          <div class="form-group">
+                      <input type="password" name="password" id="password" value="<?php echo $password;?>" placeholder="Password" />
+            <span class="error">* <?php echo $passwordErr;?></span>
+            <div class="form-group">
+                        <input type="password" name="confirm" id="confirm" value="<?php echo $confirm;?>" placeholder="Confirm your password" />
+              <span class="error">* <?php echo $confirmErr;?></span>
+              <span class="error"> <?php echo $confirmpasswordErr;?></span>
   				<div class="form-group">
                       <input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />
   					<span class="error">* <?php echo $instagramErr;?></span>
@@ -260,8 +290,8 @@
                           <td><input type="submit" name ="submit" value="Submit"/></td>
                       </ul>
                   </div>
-				  
-				</form>  
+
+				</form>
             </div>
           </section>
 		<?php
@@ -274,6 +304,7 @@
 				$count = $_POST["count"];
 				$school = $_POST["school"];
 				$state = $_POST["location"];
+                $password = $_POST["password"];
 				$db = new SQLite3('userinfo.db');
 				$db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
 				name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL, count INTEGER NOT NULL,
@@ -281,7 +312,7 @@
 				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, count, school, state)"." VALUES
 				('$method', '$paypal', '$name', '$email', '$instagram', $count, '$school', '$state');");
 				$db->close();
-			
+
 		?>
 		<h1>Thank you for signing up!</h1>
 		<?php
@@ -291,7 +322,7 @@
 		$(document).ready(function(){
 			$("#method").change(function(){
 				var value = $(this).find("option:selected").attr("value");
-				
+
 				switch (value) {
 					case "Amazon":
 						$("#paypal").hide();

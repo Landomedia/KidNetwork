@@ -58,7 +58,7 @@
 						<li><a href="index.html" data-nav-section="testimony"><span>Testimony</span></a></li>
 						<li><a href="index.html" data-nav-section="team"><span>Team</span></a></li>
 						<li><a href="index.html" data-nav-section="faq"><span>FAQ</span></a></li>
-						<li class="call-to-action"><a onclick="window.location.href='sign_in.php'"><span>Sign up free</span></a></li>
+						<li class="call-to-action"><a onclick="window.location.href='sign_in.php'"><span>Sign up!</span></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -66,12 +66,19 @@
 	</header>
 		<?
 			//initialize vars
-			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = $paypalErr = "";
-			$name = $email = $instagram = $count = $school = $state = $method = $paypal = "";
+			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = $paypalErr = $passwordErr = $confirmErr = $confirmpasswordErr = "";
+			$name = $email = $instagram = $count = $school = $state = $method = $paypal = $password = $confirm = $confirmpassword = "";
 			$state = "sign in";
-			
+
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$valid = true;	
+				$valid = true;
+                if ($_POST["password"] == $_POST["confirm"]) {
+                    // success!
+                    }
+                    else {
+                        $confirmpasswordErr = "Passwords do not match";
+                        // failed :(
+                    }
 
 				if (empty($_POST["name"])) {
 					$nameErr = "Name is required";
@@ -135,7 +142,7 @@
 				} else {
 					$location = test_input($_POST["location"]);
 				}
-					
+
 				if (empty($_POST["method"])) {
 					$methodErr = "Your payment method is required.";
 					$valid = false;
@@ -155,6 +162,22 @@
 						}
 					}
 				}
+                if (empty($_POST["password"])) {
+                  $passwordErr = "Your password is required.";
+                  $valid = false;
+                } else {
+                  $password = test_input($_POST["password"]);
+                }
+                if (empty($_POST["confirm"])) {
+                  $confirmErr = "Please confirm your password";
+                  $valid = false;
+                } else {
+                  $confirm = test_input($_POST["confirm"]);
+                }
+                if (empty($_POST["confirmpassword"])) {
+                  $confirmpasswordErr = "Your passwords do not match";
+                  $valid = false;
+                }
 
 				if ($valid) {
 					//proceed
@@ -171,7 +194,7 @@
 
 			if ($state == "sign in") {
 		?>
-<section id="fh5co-explore" style="text-align: center;">
+<section id="fh5co-explore" style="text-align: left; padding-left:20%;">
   <div class="col-md-12">
 
       <h3 class="section-title">Sign up!</h3>
@@ -184,9 +207,10 @@
 			<option <?php if ($_POST['method'] == "Paypal") {?> selected="true" <?php }; ?> value="Paypal" id="paypal-option">Paypal</option>
 			<option <?php if ($_POST['method'] == "Amazon") {?> selected="true" <?php }; ?> value="Amazon" id="amazon-option">Amazon Gift Card</option>
 		</select>
-					
+
            <span class="error">* <?php echo $methodErr;?></span>
         </div>
+
 		<div class="form-group">
 			<div id="paypal-div" <?php if ($_POST['method'] == "Paypal") {?> style="display:block;" <?php }; ?> style="display:none;">
 				<input type="text" name="paypal" id="paypal" value="<?php echo $paypal;?>" placeholder="Enter your Paypal email" />
@@ -201,6 +225,15 @@
 			<input type="text" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
 			<span class="error">* <?php echo $emailErr;?></span>
 		</div>
+		<div class="form-group">
+            <input type="password" name="password" id="password" value="<?php echo $password;?>" placeholder="Password" />
+            <span class="error">* <?php echo $passwordErr;?></span>
+        </div>
+            <div class="form-group">
+			<input type="password" name="confirm" id="confirm" value="<?php echo $confirm;?>" placeholder="Confirm your password" />
+			<span class="error">* <?php echo $confirmErr;?></span>
+			<span class="error"> <?php echo $confirmpasswordErr;?></span>
+          </div>
 		<div class="form-group">
 			<input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />
 			<span class="error">* <?php echo $instagramErr;?></span>
@@ -268,7 +301,7 @@
                 </div>
 
   				<div class="form-group">
-                      <input type="text" name="count" id="count" value="<?php echo $count;?>" placeholder="CURRENT Instagram Follower Count" />
+                    <input type="text" name="count" id="count" value="<?php echo $count;?>" placeholder="Instagram Follower Count" />
   					<span class="error">* <?php echo $countErr;?></span>
                   </div>
   				<div class="form-group">
@@ -276,10 +309,11 @@
                           <td><input type="submit" name ="submit" value="Submit"/></td>
                       </ul>
                   </div>
-				  
-				</form>  
+
+				</form>
+            <li class = "call-to-action"><a onclick="window.location.href='log_in.php'"><span>Already have an account? Log in!</span></a></li>
             </div>
-          </section>
+         </section>
 		<?php
 			} else if ($state == "store data") {
 				$method = $_POST["method"];
@@ -290,14 +324,15 @@
 				$count = $_POST["count"];
 				$school = $_POST["school"];
 				$state = $_POST["location"];
+                $password = $_POST["password"];
 				$db = new SQLite3('userinfo.db');
 				$db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
 				name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL, count INTEGER NOT NULL,
-				 school TEXT NOT NULL, state TEXT NOT NULL)");
-				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, count, school, state)"." VALUES
-				('$method', '$paypal', '$name', '$email', '$instagram', $count, '$school', '$state');");
+				 school TEXT NOT NULL, state TEXT NOT NULL, password TEXT NOT NULL)");
+				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, count, school, state, password)"." VALUES
+				('$method', '$paypal', '$name', '$email', '$instagram', $count, '$school', '$state', '$password');");
 				$db->close();
-			
+
 		?>
 		<h1>Thank you for signing up!</h1>
 		<?php
@@ -310,7 +345,7 @@
 			});
 			
 			$( "#submit" ).click(function() {
-				changeMethod(	);
+				changeMethod();
 			});
 			
 			function changeMethod() {

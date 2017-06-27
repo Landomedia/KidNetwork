@@ -168,12 +168,6 @@
                 } else {
                   $password = test_input($_POST["password"]);
                 }
-                if (empty($_POST["confirm"])) {
-                  $confirmErr = "Please confirm your password";
-                  $valid = false;
-                } else {
-                  $confirm = test_input($_POST["confirm"]);
-                }
                 if (empty($_POST["confirmpassword"])) {
                   $confirmpasswordErr = "Your passwords do not match";
                   $valid = false;
@@ -231,7 +225,6 @@
         </div>
             <div class="form-group">
 			<input type="password" name="confirm" id="confirm" value="<?php echo $confirm;?>" placeholder="Confirm your password" />
-			<span class="error">* <?php echo $confirmErr;?></span>
 			<span class="error"> <?php echo $confirmpasswordErr;?></span>
           </div>
 		<div class="form-group">
@@ -343,14 +336,14 @@
 			$("#method").change(function(){
 				changeMethod();
 			});
-			
+
 			$( "#submit" ).click(function() {
 				changeMethod();
 			});
-			
+
 			function changeMethod() {
 				var value = $('#method').find("option:selected").attr("value");
-				
+
 				switch (value) {
 					case "Amazon":
 						$("#paypal-div").hide();

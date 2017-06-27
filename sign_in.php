@@ -57,8 +57,10 @@
         <!-- Three -->
 		<?
 			//initialize vars
-			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = "";
-			$name = $email = $instagram = $count = $school = $state = "";
+			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $locationErr = "";
+			$name = $email = $instagram = $count = $school = $location = "";
+			$state = "sign in";
+			
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$valid = true;
 
@@ -118,15 +120,16 @@
 					$school = test_input($_POST["school"]);
 				}
 
-				if (empty($_POST["state"])) {
-					$stateErr = "Your state is required.";
+				if (empty($_POST["location"])) {
+					$locationErr = "Your location is required.";
 					$valid = false;
 				} else {
-					$state = test_input($_POST["state"]);
+					$location = test_input($_POST["location"]);
 				}
 
 				if ($valid) {
 					//proceed
+					$state = "store data";
 				}
 			}
 
@@ -136,6 +139,8 @@
 				$data = htmlspecialchars($data);
 				return $data;
 			}
+			
+			if ($state == "sign in") {
 		?>
 <div class="col-md-4">
 
@@ -171,7 +176,7 @@
 					<span class="error">* <?php echo $schoolErr;?></span>
 				</div>
 				<div class="form-group">
-                        <select name="state" id="state">
+                        <select name="location" id="location">
                             <option value="">What state do you live in?</option>
                             <option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
@@ -225,7 +230,7 @@
 							<option value="WI">Wisconsin</option>
 							<option value="WY">Wyoming</option>
                         </select>
-						<span class="error">* <?php echo $stateErr;?></span>
+						<span class="error">* <?php echo $locationErr;?></span>
                     </div>
                 </div>
 				<div class="form-group">
@@ -241,5 +246,10 @@
                     </ul>
                 </div>
         </div>
+		<?php 
+			} else if ($state == "store data") {
+				
+			}
+		?>
       </body>
     </html>

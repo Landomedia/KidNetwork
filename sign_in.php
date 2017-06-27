@@ -1,35 +1,65 @@
 <!DOCTYPE HTML>
-<!--
-    Theory by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-    <head>
-        <title>Sign up!</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <link rel="icon" href="images/widget.png">
-    </head>
-    <body class="subpage">
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sign up!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Landomedia" />
+    <meta name="keywords" content="make money quick, form, post, socialmedia, instagram" />
+    <meta name="author" content="FREEHTML5.CO" />
+    <meta property="og:title" content=""/>
+  	<meta property="og:image" content=""/>
+  	<meta property="og:url" content=""/>
+  	<meta property="og:site_name" content=""/>
+  	<meta property="og:description" content=""/>
+  	<meta name="twitter:title" content="" />
+  	<meta name="twitter:image" content="" />
+  	<meta name="twitter:url" content="" />
+  	<meta name="twitter:card" content="" />
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Simple Line Icons -->
+    <link rel="stylesheet" href="css/simple-line-icons.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+  </head>
 
         <!-- Header -->
-        <header id="header">
-            <div class="inner">
-                <a href="index.html" class="logo">Landomedia</a>
-                <nav id="nav">
-                    <a href="index.html">Home</a>
-                </nav>
-                <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-            </div>
-        </header>
+  <header role="banner" id="fh5co-header">
+		<div class="fluid-container">
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<!-- Mobile Toggle Menu Button -->
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+					<a class="navbar-brand" href="index.html"><span>L</span>ando<span>M</span>edia</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+				</div>
+			</nav>
+	  </div>
+	</header>
         <!-- Three -->
 		<?
 			//initialize vars
 			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = "";
 			$name = $email = $instagram = $count = $school = $state = "";
-			
+
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$valid = true;
 				
@@ -44,7 +74,7 @@
 						$valid = false;
 					}
 				}
-				
+
 				if (empty($_POST["email"])) {
 					$emailErr = "Email is required";
 					$valid = false;
@@ -56,7 +86,7 @@
 						$valid = false;
 					} 
 				}
-				
+
 				if (empty($_POST["instagram"])) {
 					$instagramErr = "Your instagram handle is required.";
 					$valid = false;
@@ -70,7 +100,7 @@
 						$valid = false;
 					}
 				}
-				
+
 				if (empty($_POST["count"])) {
 					$countErr = "Your follower count is required.";
 					$valid = false;
@@ -81,14 +111,14 @@
 						$valid = false;
 					}
 				}
-				
+
 				if (empty($_POST["school"])) {
 					$schoolErr = "Your school is required.";
 					$valid = false;
 				} else {
 					$school = test_input($_POST["school"]);
 				}
-				
+
 				if (empty($_POST["state"])) {
 					$stateErr = "Your state is required.";
 					$valid = false;
@@ -100,7 +130,7 @@
 					//proceed
 				}
 			}
-			
+
 			function test_input($data) {
 				$data = trim($data);
 				$data = stripslashes($data);
@@ -108,14 +138,20 @@
 				return $data;
 			}
 		?>
-		
-        <h3 class="align-center">Form</h3>
-		
+<div class="col-md-4">
+
+    <h3 class="section-title">Form</h3>
+
 		<p><span class="error">* required field.</span></p>
+<<<<<<< HEAD
         <form method="post">
             <div class="row uniform">
 				<div class="12u$(xsmall)">
 				<div class="select-wrapper">
+=======
+        <form method="post" action="form_process.php" class="contact-form">
+				<div class="form-group">
+>>>>>>> origin/master
                         <select name="method" id="method">
                             <option value="">How would you like to get paid?</option>
 							<option value="Paypal">Paypal</option>
@@ -123,27 +159,26 @@
 						</select>
                 </div>
 				</div>
-				<div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="text" name="paypal" id="paypal" value="If Paypal, enter your Paypal email" placeholder="email" />
                 </div>
-                <div class="12u$(xsmall)">
-                    <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name" />
+				<div class="form-group">
+                    <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name" class="form-control"/>
 					<span class="error">* <?php echo $nameErr;?></span>
                 </div>
-                <div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
 					<span class="error">* <?php echo $emailErr;?></span>
                 </div>
-                <div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />
 					<span class="error">* <?php echo $instagramErr;?></span>
                 </div>
-				<div class="12u$(xsmall)">
+				<div class="form-group">
 					<input type="text" name="school" id="school" value="<?php echo $school;?>" placeholder="School" />
 					<span class="error">* <?php echo $schoolErr;?></span>
 				</div>
-                <div class="12u$(xsmall)">
-                    <div class="select-wrapper">
+				<div class="form-group">
                         <select name="state" id="state">
                             <option value="">What state do you live in?</option>
                             <option value="AL">Alabama</option>
@@ -201,17 +236,18 @@
 						<span class="error">* <?php echo $stateErr;?></span>
                     </div>
                 </div>
-                <div class="12u$(xsmall)">
+				<div class="form-group">
                     <input type="text" name="count" id="count" value="" placeholder="CURRENT Follower Count" />
 					<span class="error">* <?php echo $countErr;?></span>
                 </div>
             </form>
 
-			
-                <div class="12u$">
+
+				<div class="form-group">
                     <ul class="actions">
                         <td><input type="submit" name ="submit" value="Submit"/></td>
                     </ul>
                 </div>
+        </div>
       </body>
     </html>

@@ -247,7 +247,7 @@
                 </div>
 
   				<div class="form-group">
-                      <input type="text" name="count" id="count" value="" placeholder="CURRENT Follower Count" />
+                      <input type="text" name="count" id="count" value="" placeholder="CURRENT Instagram Follower Count" />
   					<span class="error">* <?php echo $countErr;?></span>
                   </div>
               </form>

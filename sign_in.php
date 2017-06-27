@@ -66,8 +66,8 @@
 	</header>
 		<?
 			//initialize vars
-			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = $paypalErr = $passwordErr = $confirmErr = $confirmpasswordErr = "";
-			$name = $email = $instagram = $count = $school = $state = $method = $paypal = $password = $confirm = $confirmpassword = "";
+			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = $paypalErr = $passwordErr = $confirmpasswordErr = "";
+			$name = $email = $instagram = $count = $school = $state = $method = $paypal = $password = $confirmpassword = "";
 			$state = "sign in";
 
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -168,7 +168,7 @@
                 } else {
                   $password = test_input($_POST["password"]);
                 }
-                if (empty($_POST["confirmpassword"])) {
+                if (empty($_POST["confirm"])) {
                   $confirmpasswordErr = "Your passwords do not match";
                   $valid = false;
                 }

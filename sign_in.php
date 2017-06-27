@@ -61,7 +61,7 @@
 			$name = $email = $instagram = $count = $school = $state = "";
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$valid = true;
-				
+
 				if (empty($_POST["name"])) {
 					$nameErr = "Name is required";
 					$valid = false;
@@ -69,7 +69,7 @@
 					$name = test_input($_POST["name"]);
 					// check if name only contains letters and whitespace
 					if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-						$nameErr = "Only letters and white space allowed"; 
+						$nameErr = "Only letters and white space allowed";
 						$valid = false;
 					}
 				}
@@ -81,9 +81,9 @@
 					$email = test_input($_POST["email"]);
 					// check if e-mail address is well-formed
 					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-						$emailErr = "Invalid email format"; 
+						$emailErr = "Invalid email format";
 						$valid = false;
-					} 
+					}
 				}
 
 				if (empty($_POST["instagram"])) {
@@ -92,7 +92,7 @@
 				} else {
 					$instagram = test_input($_POST["instagram"]);
 					if (preg_match('/\s/',$instagram)) {
-						$instagramErr = "No white space allowed."; 
+						$instagramErr = "No white space allowed.";
 						$valid = false;
 					} else if (!substr($instagram, 0, 1) == "@") {
 						$instagramErr = "Your Instagram Handle must start with @.";
@@ -106,7 +106,7 @@
 				} else {
 					$count = test_input($_POST["count"]);
 					if (filter_var($count, FILTER_VALIDATE_INT)) {
-						$countErr = "Please enter a number."; 
+						$countErr = "Please enter a number.";
 						$valid = false;
 					}
 				}
@@ -124,7 +124,7 @@
 				} else {
 					$state = test_input($_POST["state"]);
 				}
-				
+
 				if ($valid) {
 					//proceed
 				}
@@ -142,15 +142,8 @@
     <h3 class="section-title">Form</h3>
 
 		<p><span class="error">* required field.</span></p>
-<<<<<<< HEAD
-        <form method="post">
-            <div class="row uniform">
-				<div class="12u$(xsmall)">
-				<div class="select-wrapper">
-=======
         <form method="post" action="form_process.php" class="contact-form">
 				<div class="form-group">
->>>>>>> origin/master
                         <select name="method" id="method">
                             <option value="">How would you like to get paid?</option>
 							<option value="Paypal">Paypal</option>

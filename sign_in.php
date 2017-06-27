@@ -225,7 +225,7 @@
         </div>
             <div class="form-group">
 			<input type="password" name="confirm" id="confirm" value="<?php echo $confirm;?>" placeholder="Confirm your password" />
-			<span class="error"> <?php echo $confirmpasswordErr;?></span>
+			<span class="error"> * <?php echo $confirmpasswordErr;?></span>
           </div>
 		<div class="form-group">
 			<input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />

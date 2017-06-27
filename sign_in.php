@@ -59,7 +59,6 @@
 			//initialize vars
 			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = "";
 			$name = $email = $instagram = $count = $school = $state = "";
-
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$valid = true;
 				

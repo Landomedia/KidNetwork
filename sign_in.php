@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html class="no-js">
+<style> .error {color:red;} </style>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,18 +48,25 @@
 				<div class="navbar-header">
 					<!-- Mobile Toggle Menu Button -->
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-					<a class="navbar-brand" href="index.html"><span>L</span>ando<span>M</span>edia</a>
+					<a class="navbar-brand" href="index.html"><span>Lando</span>Media</a>
 				</div>
-				<div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+						<li><a href="index.html" data-nav-section="explore"><span>Explore</span></a></li>
+						<li><a href="index.html" data-nav-section="testimony"><span>Testimony</span></a></li>
+						<li><a href="index.html" data-nav-section="team"><span>Team</span></a></li>
+						<li><a href="index.html" data-nav-section="faq"><span>FAQ</span></a></li>
+						<li class="call-to-action"><a onclick="window.location.href='sign_in.php'"><span>Sign up free</span></a></li>
+					</ul>
 				</div>
 			</nav>
 	  </div>
 	</header>
-        <!-- Three -->
 		<?
 			//initialize vars
-			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = "";
-			$name = $email = $instagram = $count = $school = $state = "";
+			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = "";
+			$name = $email = $instagram = $count = $school = $state = $method = "";
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$valid = true;
 
@@ -124,6 +132,12 @@
 				} else {
 					$state = test_input($_POST["state"]);
 				}
+        if (empty($_POST["method"])) {
+          $methodErr = "Your payment method is required.";
+          $valid = false;
+        } else {
+          $method = test_input($_POST["method"]);
+        }
 
 				if ($valid) {
 					//proceed
@@ -137,109 +151,111 @@
 				return $data;
 			}
 		?>
-<div class="col-md-4">
+<section id="fh5co-explore" style="text-align: center;">
+  <div class="col-md-12">
 
-    <h3 class="section-title">Form</h3>
+      <h3 class="section-title">Sign up!</h3>
 
-		<p><span class="error">* required field.</span></p>
-        <form method="post" action="form_process.php" class="contact-form">
-				<div class="form-group">
-                        <select name="method" id="method">
-                            <option value="">How would you like to get paid?</option>
-							<option value="Paypal">Paypal</option>
-							<option value="Amazon">Amazon Gift Card</option>
-						</select>
-                </div>
-				</div>
-				<div class="form-group">
-                    <input type="text" name="paypal" id="paypal" value="If Paypal, enter your Paypal email" placeholder="email" />
-                </div>
-				<div class="form-group">
-                    <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name" class="form-control"/>
-					<span class="error">* <?php echo $nameErr;?></span>
-                </div>
-				<div class="form-group">
-                    <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
-					<span class="error">* <?php echo $emailErr;?></span>
-                </div>
-				<div class="form-group">
-                    <input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />
-					<span class="error">* <?php echo $instagramErr;?></span>
-                </div>
-				<div class="form-group">
-					<input type="text" name="school" id="school" value="<?php echo $school;?>" placeholder="School" />
-					<span class="error">* <?php echo $schoolErr;?></span>
-				</div>
-				<div class="form-group">
-                        <select name="state" id="state">
-                            <option value="">What state do you live in?</option>
-                            <option value="AL">Alabama</option>
-							<option value="AK">Alaska</option>
-							<option value="AZ">Arizona</option>
-							<option value="AR">Arkansas</option>
-							<option value="CA">California</option>
-							<option value="CO">Colorado</option>
-							<option value="CT">Connecticut</option>
-							<option value="DE">Delaware</option>
-							<option value="DC">District Of Columbia</option>
-							<option value="FL">Florida</option>
-							<option value="GA">Georgia</option>
-							<option value="HI">Hawaii</option>
-							<option value="ID">Idaho</option>
-							<option value="IL">Illinois</option>
-							<option value="IN">Indiana</option>
-							<option value="IA">Iowa</option>
-							<option value="KS">Kansas</option>
-							<option value="KY">Kentucky</option>
-							<option value="LA">Louisiana</option>
-							<option value="ME">Maine</option>
-							<option value="MD">Maryland</option>
-							<option value="MA">Massachusetts</option>
-							<option value="MI">Michigan</option>
-							<option value="MN">Minnesota</option>
-							<option value="MS">Mississippi</option>
-							<option value="MO">Missouri</option>
-							<option value="MT">Montana</option>
-							<option value="NE">Nebraska</option>
-							<option value="NV">Nevada</option>
-							<option value="NH">New Hampshire</option>
-							<option value="NJ">New Jersey</option>
-							<option value="NM">New Mexico</option>
-							<option value="NY">New York</option>
-							<option value="NC">North Carolina</option>
-							<option value="ND">North Dakota</option>
-							<option value="OH">Ohio</option>
-							<option value="OK">Oklahoma</option>
-							<option value="OR">Oregon</option>
-							<option value="PA">Pennsylvania</option>
-							<option value="RI">Rhode Island</option>
-							<option value="SC">South Carolina</option>
-							<option value="SD">South Dakota</option>
-							<option value="TN">Tennessee</option>
-							<option value="TX">Texas</option>
-							<option value="UT">Utah</option>
-							<option value="VT">Vermont</option>
-							<option value="VA">Virginia</option>
-							<option value="WA">Washington</option>
-							<option value="WV">West Virginia</option>
-							<option value="WI">Wisconsin</option>
-							<option value="WY">Wyoming</option>
-                        </select>
-						<span class="error">* <?php echo $stateErr;?></span>
-                    </div>
-                </div>
-				<div class="form-group">
-                    <input type="text" name="count" id="count" value="" placeholder="CURRENT Follower Count" />
-					<span class="error">* <?php echo $countErr;?></span>
-                </div>
-            </form>
-
-
-				<div class="form-group">
-                    <ul class="actions">
-                        <td><input type="submit" name ="submit" value="Submit"/></td>
-                    </ul>
-                </div>
+  		<p><span class="error">* required field.</span></p>
+          <form method="post" action="form_process.php" class="contact-form">
+			<div class="form-group">
+        <select name="method" id="method">
+            <option value="">How would you like to get paid?</option>
+						<option value="Paypal">Paypal</option>
+						<option value="Amazon">Amazon Gift Card</option>
+					</select>
+           <span class="error">* <?php echo $methodErr;?></span>
         </div>
-      </body>
-    </html>
+  				<div class="form-group">
+                <input type="text" name="paypal" id="paypal" value="<?php echo $paypal;?>" placeholder="If Paypal, enter your Paypal email"/>
+            </div>
+  				<div class="form-group">
+                <input type="text" name="name" id="name" value="<?php echo $name;?>" placeholder="Name"/>
+  					<span class="error">* <?php echo $nameErr;?></span>
+          </div>
+  				<div class="form-group">
+                      <input type="email" name="email" id="email" value="<?php echo $email;?>" placeholder="Email" />
+  					<span class="error">* <?php echo $emailErr;?></span>
+          </div>
+  				<div class="form-group">
+                      <input type="text" name="instagram" id="instagram" value="<?php echo $instagram;?>" placeholder="@InstagramHandle" />
+  					<span class="error">* <?php echo $instagramErr;?></span>
+          </div>
+  				<div class="form-group">
+  					<input type="text" name="school" id="school" value="<?php echo $school;?>" placeholder="School" />
+  					<span class="error">* <?php echo $schoolErr;?></span>
+  				</div>
+  				<div class="form-group">
+            <select name="state" id="state">
+                <option value="">What state do you live in?</option>
+                <option value="AL">Alabama</option>
+  							<option value="AK">Alaska</option>
+  							<option value="AZ">Arizona</option>
+  							<option value="AR">Arkansas</option>
+  							<option value="CA">California</option>
+  							<option value="CO">Colorado</option>
+  							<option value="CT">Connecticut</option>
+  							<option value="DE">Delaware</option>
+  							<option value="DC">District Of Columbia</option>
+  							<option value="FL">Florida</option>
+  							<option value="GA">Georgia</option>
+  							<option value="HI">Hawaii</option>
+  							<option value="ID">Idaho</option>
+  							<option value="IL">Illinois</option>
+  							<option value="IN">Indiana</option>
+  							<option value="IA">Iowa</option>
+  							<option value="KS">Kansas</option>
+  							<option value="KY">Kentucky</option>
+  							<option value="LA">Louisiana</option>
+  							<option value="ME">Maine</option>
+  							<option value="MD">Maryland</option>
+  							<option value="MA">Massachusetts</option>
+  							<option value="MI">Michigan</option>
+  							<option value="MN">Minnesota</option>
+  							<option value="MS">Mississippi</option>
+  							<option value="MO">Missouri</option>
+  							<option value="MT">Montana</option>
+  							<option value="NE">Nebraska</option>
+  							<option value="NV">Nevada</option>
+  							<option value="NH">New Hampshire</option>
+  							<option value="NJ">New Jersey</option>
+  							<option value="NM">New Mexico</option>
+  							<option value="NY">New York</option>
+  							<option value="NC">North Carolina</option>
+  							<option value="ND">North Dakota</option>
+  							<option value="OH">Ohio</option>
+  							<option value="OK">Oklahoma</option>
+  							<option value="OR">Oregon</option>
+  							<option value="PA">Pennsylvania</option>
+  							<option value="RI">Rhode Island</option>
+  							<option value="SC">South Carolina</option>
+  							<option value="SD">South Dakota</option>
+  							<option value="TN">Tennessee</option>
+  							<option value="TX">Texas</option>
+  							<option value="UT">Utah</option>
+  							<option value="VT">Vermont</option>
+  							<option value="VA">Virginia</option>
+  							<option value="WA">Washington</option>
+  							<option value="WV">West Virginia</option>
+  							<option value="WI">Wisconsin</option>
+  							<option value="WY">Wyoming</option>
+                          </select>
+                  <span class="error">* <?php echo $stateErr;?></span>
+                </div>
+
+  				<div class="form-group">
+                      <input type="text" name="count" id="count" value="" placeholder="CURRENT Follower Count" />
+  					<span class="error">* <?php echo $countErr;?></span>
+                  </div>
+              </form>
+
+
+  				<div class="form-group">
+                      <ul class="actions">
+                          <td><input type="submit" name ="submit" value="Submit"/></td>
+                      </ul>
+                  </div>
+            </div>
+          </section>
+        </body>
+      </html>

@@ -9,8 +9,7 @@ $email = $_POST["email"];
 $instagram = $_POST["instagram"];
 $count = $_POST["count"];
 $school = $_POST["school"];
-$state = $_POST["state"];
-echo "$state";
+$state = $_POST["location"];
 $db = new SQLite3('userinfo.db');
 $db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
 name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL, count INTEGER NOT NULL,

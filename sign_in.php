@@ -126,11 +126,11 @@
 					$school = test_input($_POST["school"]);
 				}
 
-				if (empty($_POST["state"])) {
-					$stateErr = "Your state is required.";
+				if (empty($_POST["location"])) {
+					$locationErr = "Your location is required.";
 					$valid = false;
 				} else {
-					$state = test_input($_POST["state"]);
+					$location = test_input($_POST["location"]);
 				}
         if (empty($_POST["method"])) {
           $methodErr = "Your payment method is required.";
@@ -141,6 +141,7 @@
 
 				if ($valid) {
 					//proceed
+					$state = "store data";
 				}
 			}
 
@@ -150,6 +151,8 @@
 				$data = htmlspecialchars($data);
 				return $data;
 			}
+
+			if ($state == "sign in") {
 		?>
 <section id="fh5co-explore" style="text-align: center;">
   <div class="col-md-12">
@@ -259,3 +262,10 @@
           </section>
         </body>
       </html>
+		<?php
+			} else if ($state == "store data") {
+
+			}
+		?>
+      </body>
+    </html>

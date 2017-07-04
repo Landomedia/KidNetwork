@@ -53,12 +53,11 @@
 				</div>
         <div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+						<li class="active"><a href="index.html" data-nav-section="home"><span>Home</span></a></li>
 						<li><a href="index.html" data-nav-section="explore"><span>Explore</span></a></li>
 						<li><a href="index.html" data-nav-section="testimony"><span>Testimony</span></a></li>
 						<li><a href="index.html" data-nav-section="team"><span>Team</span></a></li>
 						<li><a href="index.html" data-nav-section="faq"><span>FAQ</span></a></li>
-						<li class="call-to-action"><a onclick="window.location.href='sign_in.php'"><span>Sign up!</span></a></li>
 					</ul>
 				</div>
 			</nav>

@@ -66,8 +66,8 @@
 	</header>
 		<?
 			//initialize vars
-			$nameErr = $emailErr = $instagramErr = $countErr = $schoolErr = $stateErr = $methodErr = $paypalErr = $passwordErr = $confirmpasswordErr = "";
-			$name = $email = $instagram = $count = $school = $state = $method = $paypal = $password = $confirmpassword = "";
+			$nameErr = $emailErr = $instagramErr = $schoolErr = $stateErr = $methodErr = $paypalErr = $passwordErr = $confirmpasswordErr = "";
+			$name = $email = $instagram = $school = $state = $method = $paypal = $password = $confirmpassword = "";
 			$state = "sign in";
 
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -114,17 +114,6 @@
 						$valid = false;
 					} else if (!substr($instagram, 0, 1) == "@") {
 						$instagramErr = "Your Instagram Handle must start with @.";
-						$valid = false;
-					}
-				}
-
-				if (empty($_POST["count"])) {
-					$countErr = "Your follower count is required.";
-					$valid = false;
-				} else {
-					$count = test_input($_POST["count"]);
-					if (!filter_var($count, FILTER_VALIDATE_INT)) {
-						$countErr = "Please enter a number.";
 						$valid = false;
 					}
 				}
@@ -292,11 +281,6 @@
                           </select>
                   <span class="error">* <?php echo $locationErr;?></span>
                 </div>
-
-  				<div class="form-group">
-                    <input type="text" name="count" id="count" value="<?php echo $count;?>" placeholder="Instagram Follower Count" />
-  					<span class="error">* <?php echo $countErr;?></span>
-                  </div>
   				<div class="form-group">
                       <ul class="actions">
                           <td><input type="submit" name ="submit" value="Submit"/></td>
@@ -314,16 +298,15 @@
 				$name = $_POST["name"];
 				$email = $_POST["email"];
 				$instagram = $_POST["instagram"];
-				$count = $_POST["count"];
 				$school = $_POST["school"];
 				$state = $_POST["location"];
                 $password = $_POST["password"];
-				//s$db = new SQLite3('userinfo.db');
-				//$db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
-				//name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL, count INTEGER NOT NULL,
-				//school TEXT NOT NULL, state TEXT NOT NULL, password TEXT NOT NULL)");
-				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, count, school, state, password)"." VALUES
-				('$method', '$paypal', '$name', '$email', '$instagram', $count, '$school', '$state', '$password');");
+				$db = new SQLite3('userinfo.db');
+				$db->exec(" CREATE TABLE IF NOT EXISTS users (method TEXT NOT NULL,paypal TEXT,
+				name TEXT NOT NULL,email TEXT NOT NULL, instagram TEXT NOT NULL,
+				school TEXT NOT NULL, state TEXT NOT NULL, password TEXT NOT NULL)");
+				$db->exec("INSERT INTO users"."(method, paypal, name, email, instagram, school, state, password)"." VALUES
+				('$method', '$paypal', '$name', '$email', '$instagram', '$school', '$state', '$password');");
 				$db->close();
 
 		?>
